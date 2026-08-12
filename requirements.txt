@@ -1,0 +1,5 @@
+langgraph>=0.3.0
+anthropic>=0.69.0
+openai-whisper>=20231117
+streamlit>=1.36.0
+truststore>=0.9.0

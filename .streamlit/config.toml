@@ -1,0 +1,6 @@
+[server]
+# Long-form sources are routinely over a gigabyte; the 200 MB default rejects them.
+maxUploadSize = 8192
+
+[browser]
+gatherUsageStats = false
