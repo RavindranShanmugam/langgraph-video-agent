@@ -206,7 +206,11 @@ while (queue.length && pages.length < MAX_PAGES) {
     for (const l of links) {
       const clean = l.split('#')[0];
       if (!clean.startsWith(origin) || seen.has(clean)) continue;
-      if (/\.(pdf|zip|jpg|jpeg|png|gif|svg|webp|mp4|webm|docx?)$/i.test(clean)) continue;
+      // Test the path, not the whole URL: a link like `/cv.pdf?dn=resume` still
+      // points at a document, and crawling it yields a junk HTML page.
+      let ext = '';
+      try { ext = new URL(clean).pathname; } catch { continue; }
+      if (/\.(pdf|zip|jpe?g|png|gif|svg|webp|mp4|webm|mp3|docx?|pptx?|xlsx?)$/i.test(ext)) continue;
       seen.add(clean);
       queue.push(clean);
     }
