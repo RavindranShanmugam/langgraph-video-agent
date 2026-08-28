@@ -13,10 +13,23 @@ This tool loads the page in Chromium, waits for the network to settle, scrolls t
 full height to trigger lazy-loaded images, and only then serialises the DOM. What
 you get is the page as a visitor actually sees it.
 
+## Setup
+
+Needs Node 18+ (`node --version`). From a checkout of this repo:
+
+```bash
+cd website
+npm install
+npx playwright install chromium   # downloads the browser; skip if already present
+```
+
+`npm install` usually fetches Chromium on its own. Run the explicit command if the
+extractor reports `Executable doesn't exist`. To use a Chrome you already have,
+set `CHROMIUM_PATH=/path/to/chrome`.
+
 ## Usage
 
 ```bash
-npm install
 npm run extract -- --url https://www.sriramvenkatassamy.com/
 npm run serve            # browse the result at http://localhost:8080
 ```
@@ -28,8 +41,12 @@ site/
   index.html                    # '/'          -> index.html
   about/index.html              # '/about'     -> about/index.html
   assets/<host>/...             # css, images, fonts, media
+  screenshots/*.png             # full-page render of each page
   extraction-manifest.json      # every page + asset captured, and any failures
 ```
+
+The screenshots are the fastest way to check the capture is faithful — compare one
+against the live site — and they double as a design reference when rebuilding.
 
 ### Options
 
@@ -40,6 +57,7 @@ site/
 | `--max-pages <n>` | `25` | Cap on same-origin pages crawled. |
 | `--wait <ms>` | `2500` | Settle time after scrolling, for animations and late loads. |
 | `--keep-js` | off | Keep the original `<script>` tags (see below). |
+| `--no-screenshots` | off | Skip full-page screenshot capture. |
 
 `CHROMIUM_PATH=/path/to/chrome` overrides browser discovery.
 

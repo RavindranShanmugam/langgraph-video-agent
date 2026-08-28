@@ -42,13 +42,14 @@ const has = (name) => args.includes(`--${name}`);
 
 const START = flag('url');
 if (!START) {
-  console.error('Usage: node extract.mjs --url <url> [--out dir] [--max-pages N] [--keep-js] [--wait ms]');
+  console.error('Usage: node extract.mjs --url <url> [--out dir] [--max-pages N] [--keep-js] [--wait ms] [--no-screenshots]');
   process.exit(1);
 }
 const OUT = path.resolve(String(flag('out', 'site')));
 const MAX_PAGES = Number(flag('max-pages', 25));
 const SETTLE_MS = Number(flag('wait', 2500));
 const KEEP_JS = has('keep-js');
+const SHOTS = !has('no-screenshots');
 
 const origin = new URL(START).origin;
 const saved = new Map();   // absolute asset url -> local path relative to OUT
@@ -169,6 +170,14 @@ while (queue.length && pages.length < MAX_PAGES) {
       });
     });
     await page.waitForTimeout(SETTLE_MS);
+
+    if (SHOTS) {
+      // A full-page render is the reference for rebuilding the design later,
+      // and the quickest way to eyeball whether the capture is faithful.
+      const shot = `screenshots/${pagePath(url).replace(/\/?index\.html$/, '') || 'index'}.png`;
+      await mkdir(path.dirname(path.join(OUT, shot)), { recursive: true });
+      await page.screenshot({ path: path.join(OUT, shot), fullPage: true });
+    }
 
     const local = pagePath(url);
     pageFor.set(url, local);
