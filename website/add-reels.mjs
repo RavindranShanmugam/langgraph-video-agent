@@ -21,12 +21,16 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const argv = process.argv.slice(2);
 const opt = (name, fb) => { const i = argv.indexOf(`--${name}`); return i === -1 ? fb : argv[i + 1]; };
 const has = (name) => argv.includes(`--${name}`);
 
-const OUT     = path.resolve(opt('out', path.join(path.dirname(new URL(import.meta.url).pathname), 'ravs-site/assets/reels')));
+/* fileURLToPath, not URL.pathname: on Windows the latter yields "/C:/..." and
+   path.resolve then prepends the drive again, giving "C:\C:\...". */
+const HERE    = path.dirname(fileURLToPath(import.meta.url));
+const OUT     = path.resolve(opt('out', path.join(HERE, 'ravs-site/assets/reels')));
 const MANIFEST= path.join(OUT, 'reels.json');
 const MAX     = Number(opt('max', 6));
 const HEIGHT  = Number(opt('height', 1280));

@@ -41,8 +41,10 @@ Or just open `ravs-site/index.html` — there is no build step.
 
 ## Open items
 
-- **`ravs-site/assets/resume.pdf` does not exist.** The Resume button in the
-  nav of both pages points at it and 404s until the file is added.
+- **No ATS-safe résumé document exists.** The Resume button now opens
+  `ravs-site/resume.html` (a designed, animated page), which is right for
+  sharing but is not what an applicant tracking system can parse. A plain
+  single-column DOCX/PDF is still needed for actual applications.
 - **Two of three project cards have no link.** Only the LangGraph card has a
   "View the code" link; add one to the other two when those repos are public.
 - **The Instagram row is empty.** See below.

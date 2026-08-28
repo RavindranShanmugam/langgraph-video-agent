@@ -21,23 +21,29 @@
 <body>
 
 <header class="nav"><div class="wrap">
-  <a class="brand" href="index.html" aria-label="Ravindran Shanmugam — home"><img src="assets/ravi.jpg" alt=""></a>
+  <a class="brand" href="index.html" aria-label="Ravindran Shanmugam — home"><img src="assets/ravi.jpg" alt="" width="40" height="40"></a>
   <nav class="pillset">
     <a href="index.html" aria-current="page">Home</a>
     <a href="about.html">About</a>
   </nav>
   <nav class="pillset dark">
     <a href="https://automation.ravsdigital.com/">Let's Talk</a>
-    <!-- Drop your CV at assets/resume.pdf and this button is live. -->
-    <a href="assets/resume.pdf">Resume</a>
+    <a href="resume.html">Resume</a>
   </nav>
 </div></header>
 
 <section class="hero">
   <div class="portrait" aria-hidden="true"></div>
   <div class="wrap inner">
-    <p class="eyebrow">AI Systems Builder</p>
-    <h1 class="wordmark">Ravi</h1>
+    <div class="herotext">
+      <p class="eyebrow">AI Systems Builder</p>
+      <h1 class="wordmark">Ravi</h1>
+    </div>
+    <!-- Stays empty on phones, on reduced-motion, and without WebGL. The hero
+         is designed to look finished without it. -->
+    <div class="herographic" aria-hidden="true">
+      <canvas id="herocanvas"></canvas>
+    </div>
   </div>
 </section>
 
@@ -94,6 +100,7 @@
           <p>A lead fills in a form at 9pm. Seconds later an AI voice agent calls them, works out the job, offers real calendar openings, books it, logs it and texts a confirmation. <b>The owner's first involvement is a text saying the job is already booked.</b></p>
           <p class="note"><b>The decision that mattered:</b> built on the client's own accounts, not a per-seat platform. They own it outright — no monthly tax on their own lead flow.</p>
           <div class="chips"><span class="chip">Voice AI</span><span class="chip">FastAPI</span><span class="chip">Calendar booking</span><span class="chip">CRM + SMS</span></div>
+          <a class="more" href="https://github.com/RavindranShanmugam/speed-to-lead">View the code</a>
         </div>
       </article>
 
@@ -131,6 +138,7 @@
           <p>Bank statement PDFs become a categorized spreadsheet you can talk to. Ask "what did I spend most on last quarter?" and get a real answer from your own data — running entirely on your machine, with nothing uploaded anywhere.</p>
           <p class="note"><b>The decision that mattered:</b> the model picks the tool; Python does the arithmetic. Language models are excellent at routing and unreliable at counting — so they never touch the numbers.</p>
           <div class="chips"><span class="chip">Local LLM</span><span class="chip">PDF extraction</span><span class="chip">Tool-calling agent</span><span class="chip">Fully private</span></div>
+          <a class="more" href="https://github.com/RavindranShanmugam/finance-agent-clean">View the code</a>
         </div>
       </article>
 
@@ -286,6 +294,35 @@
   </section>
   <footer>© <span id="yr">2026</span> Ravs LLC · Cary, North Carolina</footer>
 </div>
+
+<script type="module">
+/* Hero graph. Every guard below is a reason NOT to ship 190KB of WebGL to
+   someone: no module support, a phone, reduced-motion, metered data, or no GL
+   at all. The static hero is the default and this is the enhancement. */
+(function heroGraph() {
+  const canvas = document.getElementById('herocanvas');
+  if (!canvas) return;
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!matchMedia('(min-width: 1000px)').matches) return;
+  if (navigator.connection && navigator.connection.saveData) return;
+
+  /* Probe for a real GL context before fetching the library. */
+  try {
+    const probe = document.createElement('canvas');
+    if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) return;
+  } catch { return; }
+
+  /* Wait for idle so the graph never competes with fonts or the LCP text. */
+  const go = () => import('./assets/hero3d.js')
+    .then(m => m.mountHeroGraph(canvas))
+    .catch(() => {});   /* leave the static hero exactly as it is */
+
+  'requestIdleCallback' in window
+    ? requestIdleCallback(go, { timeout: 2200 })
+    : setTimeout(go, 900);
+})();
+</script>
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
