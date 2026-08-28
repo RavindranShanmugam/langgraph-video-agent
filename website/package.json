@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Renders a website in Chromium and emits a self-contained static frontend package.",
   "scripts": {
+    "browser": "playwright install chromium",
     "extract": "node extract.mjs",
     "serve": "npx --yes http-server site -p 8080 -c-1"
   },

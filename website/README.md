@@ -15,24 +15,28 @@ you get is the page as a visitor actually sees it.
 
 ## Setup
 
-Needs Node 18+ (`node --version`). From a checkout of this repo:
+Needs Node 18+ (`node --version`). Run these **one line at a time**, letting each
+finish before typing the next:
 
-```bash
+```
 git fetch origin
 git checkout claude/website-frontend-extraction-ukb9qt
 cd website
 npm install
-npx playwright install chromium
+npm run browser
 ```
 
-Run each line separately on **Windows PowerShell 5.1** — it rejects `&&` as a
-separator (use `;` instead, or just press Enter between commands).
+`git fetch origin` is not optional on an existing clone — without it the branch
+does not exist locally, `git checkout` fails with *pathspec did not match*, the
+`website/` directory is never created, and every later command fails looking for
+a `package.json` that is not there.
 
-Order matters: run `npx playwright install chromium` **from inside `website/`,
-after `npm install`**. Elsewhere, `npx` fetches whatever Playwright is newest and
-installs a browser build that the pinned 1.56.1 will not look for, producing
-`Executable doesn't exist`. If npx offers to install a version other than
-1.56.1, answer `n` — you are in the wrong directory.
+`npm run browser` installs Chromium using the pinned Playwright 1.56.1. Use it
+rather than `npx playwright install chromium`: outside `website/`, npx fetches
+whatever Playwright is newest and installs a browser build the pinned version
+never looks for, giving `Executable doesn't exist`.
+
+Windows PowerShell 5.1 rejects `&&` as a separator — use `;` or separate lines.
 
 Chromium is discovered from `PLAYWRIGHT_BROWSERS_PATH` or the default per-user
 cache on Windows, macOS and Linux. To use a Chrome you already have, set
@@ -40,10 +44,14 @@ cache on Windows, macOS and Linux. To use a Chrome you already have, set
 
 ## Usage
 
-```bash
-npm run extract -- --url https://www.sriramvenkatassamy.com/
-npm run serve            # browse the result at http://localhost:8080
+Both must be run from inside `website/`:
+
 ```
+npm run extract -- --url https://www.sriramvenkatassamy.com/
+npm run serve
+```
+
+`serve` browses the result at http://localhost:8080.
 
 Output lands in `site/`:
 
