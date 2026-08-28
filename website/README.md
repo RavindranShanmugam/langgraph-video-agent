@@ -18,14 +18,25 @@ you get is the page as a visitor actually sees it.
 Needs Node 18+ (`node --version`). From a checkout of this repo:
 
 ```bash
+git fetch origin
+git checkout claude/website-frontend-extraction-ukb9qt
 cd website
 npm install
-npx playwright install chromium   # downloads the browser; skip if already present
+npx playwright install chromium
 ```
 
-`npm install` usually fetches Chromium on its own. Run the explicit command if the
-extractor reports `Executable doesn't exist`. To use a Chrome you already have,
-set `CHROMIUM_PATH=/path/to/chrome`.
+Run each line separately on **Windows PowerShell 5.1** — it rejects `&&` as a
+separator (use `;` instead, or just press Enter between commands).
+
+Order matters: run `npx playwright install chromium` **from inside `website/`,
+after `npm install`**. Elsewhere, `npx` fetches whatever Playwright is newest and
+installs a browser build that the pinned 1.56.1 will not look for, producing
+`Executable doesn't exist`. If npx offers to install a version other than
+1.56.1, answer `n` — you are in the wrong directory.
+
+Chromium is discovered from `PLAYWRIGHT_BROWSERS_PATH` or the default per-user
+cache on Windows, macOS and Linux. To use a Chrome you already have, set
+`CHROMIUM_PATH` to its executable.
 
 ## Usage
 

@@ -22,14 +22,31 @@ import path from 'node:path';
  */
 function findChromium() {
   if (process.env.CHROMIUM_PATH && existsSync(process.env.CHROMIUM_PATH)) return process.env.CHROMIUM_PATH;
-  const store = process.env.PLAYWRIGHT_BROWSERS_PATH;
-  if (!store || !existsSync(store)) return undefined;
-  const candidates = readdirSync(store)
-    .filter((d) => d.startsWith('chromium-'))
-    .map((d) => path.join(store, d, 'chrome-linux', 'chrome'))
-    .filter(existsSync);
-  return candidates[0];
+  const home = process.env.USERPROFILE || process.env.HOME || '';
+  const stores = [
+    process.env.PLAYWRIGHT_BROWSERS_PATH,
+    process.platform === 'win32' && path.join(home, 'AppData', 'Local', 'ms-playwright'),
+    process.platform === 'darwin' && path.join(home, 'Library', 'Caches', 'ms-playwright'),
+    process.platform === 'linux' && path.join(home, '.cache', 'ms-playwright'),
+  ].filter((d) => d && existsSync(d));
+  // Playwright names the binary differently per platform.
+  const rels = [
+    ['chrome-win', 'chrome.exe'],
+    ['chrome-linux', 'chrome'],
+    ['chrome-mac', 'Chromium.app', 'Contents', 'MacOS', 'Chromium'],
+    ['chrome-mac-arm64', 'Chromium.app', 'Contents', 'MacOS', 'Chromium'],
+  ];
+  for (const store of stores) {
+    for (const dir of readdirSync(store).filter((d) => d.startsWith('chromium-')).sort().reverse()) {
+      for (const rel of rels) {
+        const exe = path.join(store, dir, ...rel);
+        if (existsSync(exe)) return exe;
+      }
+    }
+  }
+  return undefined;   // let Playwright resolve its own default
 }
+
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
