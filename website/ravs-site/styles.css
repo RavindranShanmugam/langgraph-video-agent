@@ -1,0 +1,331 @@
+/* ==========================================================================
+   Ravs LLC — Ravindran Shanmugam
+   Layout follows the reference site's structure: floating pill nav, oversized
+   wordmark hero over a faded portrait, a meta strip, horizontally scrolling
+   card rows, one full-bleed accent panel, and a large closing contact block.
+   Rebuilt from scratch rather than inheriting the reference's generated CSS.
+   ========================================================================== */
+
+:root{
+  --bg:#FFFFFF;
+  --ink:#000000;
+  --mid:#5D5D61;
+  --faint:#949494;
+  --line:#E4E4E4;
+  --panel:#F4F4F2;
+  --accent:#E6FF4A;          /* full-bleed panel */
+  --tint-1:#EFEBFF;          /* card wash — violet */
+  --tint-2:#E4F5EF;          /* card wash — mint   */
+  --tint-3:#FFEDE3;          /* card wash — peach  */
+  --radius:20px;
+  --pad:40px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Inter,-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
+@media(max-width:760px){:root{--pad:20px}}
+
+/* ---------- floating pill nav ---------------------------------------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  padding:22px 0;
+  background:linear-gradient(var(--bg) 62%,transparent);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{
+  width:44px;height:44px;border-radius:50%;overflow:hidden;
+  border:1px solid var(--line);flex:none;background:var(--panel);
+}
+.brand img{width:100%;height:100%;object-fit:cover}
+.pillset{
+  display:flex;align-items:center;gap:4px;
+  background:var(--panel);border-radius:999px;padding:5px;
+}
+.pillset a{
+  padding:9px 20px;border-radius:999px;font-size:14px;font-weight:500;
+  color:var(--mid);transition:background .18s,color .18s;white-space:nowrap;
+}
+.pillset a:hover{color:var(--ink)}
+.pillset a[aria-current="page"]{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.10)}
+
+.pillset.dark{background:#111}
+.pillset.dark a{color:#fff}
+.pillset.dark a:hover{background:#2A2A2A}
+
+@media(max-width:720px){
+  .nav .wrap{flex-wrap:wrap;justify-content:center}
+  .brand{order:-1}
+  .pillset a{padding:8px 14px;font-size:13px}
+}
+
+/* ---------- hero ------------------------------------------------------ */
+.hero{position:relative;padding:40px 0 0;text-align:center;overflow:hidden}
+.hero .portrait{
+  position:absolute;left:50%;top:-40px;transform:translateX(-50%);
+  width:min(560px,92vw);aspect-ratio:1;
+  background:url('assets/ravi.jpg') center 28% / cover no-repeat;
+  filter:grayscale(1) contrast(1.05);
+  opacity:.30;
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 40%,#000 30%,transparent 74%);
+          mask-image:radial-gradient(ellipse 62% 58% at 50% 40%,#000 30%,transparent 74%);
+  pointer-events:none;
+}
+.hero .inner{position:relative;padding:96px 0 40px}
+.eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:6px;
+}
+.wordmark{
+  font-family:'Archivo Black',Impact,'Helvetica Neue',sans-serif;
+  font-weight:400;text-transform:uppercase;
+  font-size:clamp(58px,13.5vw,182px);
+  line-height:.92;letter-spacing:.10em;
+  margin-left:.10em;   /* optical centring against the trailing letter-space */
+}
+@media(max-width:640px){.hero .inner{padding:64px 0 28px}}
+
+/* ---------- meta strip ------------------------------------------------ */
+.metastrip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  padding:26px 0 96px;
+}
+.metastrip div{
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);line-height:1.7;
+}
+.metastrip div:nth-child(2){text-align:center}
+.metastrip div:nth-child(3){text-align:right}
+@media(max-width:820px){
+  .metastrip{grid-template-columns:1fr;gap:10px;padding:20px 0 64px;text-align:left}
+  .metastrip div:nth-child(2),.metastrip div:nth-child(3){text-align:left}
+}
+
+/* ---------- section headings ------------------------------------------ */
+.sec{padding:0 0 78px}
+.sec h2{
+  font-size:clamp(24px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;
+  line-height:1.15;
+}
+.sec .sub{
+  font-size:13px;color:var(--faint);margin-top:6px;max-width:76ch;line-height:1.6;
+}
+.sec .sub em{color:#D63B3B;font-style:normal}
+.sec .head{margin-bottom:26px}
+
+/* ---------- horizontal card row --------------------------------------- */
+.row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(430px,1fr);
+  gap:22px;overflow-x:auto;padding-bottom:10px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+}
+.row::-webkit-scrollbar{height:8px}
+.row::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
+.row > *{scroll-snap-align:start}
+@media(max-width:640px){.row{grid-auto-columns:minmax(300px,86vw)}}
+
+/* three-up grid (no scroll) */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.three{grid-template-columns:1fr}}
+
+/* ---------- cards ------------------------------------------------------ */
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:box-shadow .22s,transform .22s;
+}
+.card:hover{box-shadow:0 14px 40px rgba(0,0,0,.09);transform:translateY(-3px)}
+.card .vis{padding:26px 24px 20px;border-bottom:1px solid var(--line);overflow-x:auto}
+.card .vis svg{width:100%;height:auto;display:block}
+.card .vis.t1{background:var(--tint-1)}
+.card .vis.t2{background:var(--tint-2)}
+.card .vis.t3{background:var(--tint-3)}
+.card .body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.card .titlerow{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.card h3{font-size:19px;font-weight:700;letter-spacing:-.015em}
+.card p{font-size:14px;color:var(--mid);margin-top:9px}
+.card p b{color:var(--ink);font-weight:600}
+.card .note{
+  font-size:13px;color:var(--mid);margin-top:13px;padding-top:13px;
+  border-top:1px solid var(--line);
+}
+.tag{
+  font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:4px 11px;
+  color:var(--mid);white-space:nowrap;
+}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:16px}
+.chip{
+  font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  background:var(--panel);border-radius:5px;padding:5px 9px;color:var(--mid);
+}
+.card .more{
+  font-size:13px;font-weight:600;margin-top:14px;
+  border-bottom:1px solid var(--ink);align-self:flex-start;padding-bottom:1px;
+}
+
+/* wide single card */
+.widecard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+.widecard .vis{background:var(--panel);padding:34px 30px;border-bottom:1px solid var(--line);overflow-x:auto}
+.widecard .vis svg{width:100%;min-width:760px;height:auto;display:block}
+.widecard .body{padding:26px 30px 30px}
+.widecard h3{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.widecard p{font-size:14.5px;color:var(--mid);margin-top:10px;max-width:78ch}
+.widecard p b{color:var(--ink);font-weight:600}
+
+/* numbered step card */
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+.step .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--faint)}
+.step h3{font-size:17px;font-weight:700;margin:9px 0 8px;letter-spacing:-.01em}
+.step p{font-size:14px;color:var(--mid)}
+
+/* ---------- full-bleed accent panel ----------------------------------- */
+.accent{
+  background:var(--accent);
+  padding:110px 0 96px;text-align:center;margin-bottom:96px;
+}
+.accent .mark{
+  font-family:'Archivo Black',Impact,'Helvetica Neue',sans-serif;
+  font-size:clamp(52px,11vw,150px);line-height:.94;letter-spacing:.02em;
+  text-transform:uppercase;color:#000;
+}
+.accent .tagline{
+  font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  margin-top:14px;color:#2C3300;
+}
+.accent .pill{
+  display:inline-block;margin-top:30px;background:#fff;color:#000;
+  border-radius:999px;padding:13px 30px;font-size:14px;font-weight:600;
+  transition:transform .18s;
+}
+.accent .pill:hover{transform:translateY(-2px)}
+
+/* ---------- contact ---------------------------------------------------- */
+.contact{padding-bottom:34px}
+.contact .top{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.contact h2{
+  font-size:clamp(38px,6vw,74px);font-weight:700;letter-spacing:-.035em;line-height:1.02;
+}
+.contact .book{
+  border:1px solid var(--ink);border-radius:999px;padding:12px 26px;
+  font-size:14px;font-weight:600;white-space:nowrap;transition:.18s;
+}
+.contact .book:hover{background:var(--ink);color:#fff}
+.contact hr{border:0;border-top:1px solid var(--line);margin:34px 0 20px}
+.contact .details{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.contact .details a.line{display:block;font-size:15px;border-bottom:1px solid currentColor;width:fit-content;margin-bottom:5px}
+.contact .details .tel{font-size:15px;color:var(--mid)}
+.socials{display:flex;gap:16px;align-items:center}
+.socials a{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;transition:.18s;
+}
+.socials a:hover{background:var(--ink);border-color:var(--ink)}
+.socials a:hover svg{fill:#fff}
+.socials svg{width:16px;height:16px;fill:var(--ink);transition:fill .18s}
+
+footer{padding:26px 0 46px;text-align:right;font-size:12px;color:var(--faint)}
+
+/* ==========================================================================
+   Dark variant — the About page
+   ========================================================================== */
+body.dark{background:#000;color:#fff}
+body.dark .nav{background:linear-gradient(#000 62%,transparent)}
+body.dark .brand{border-color:#2A2A2A;background:#111}
+body.dark .pillset{background:#111}
+body.dark .pillset a{color:#B4B4B4}
+body.dark .pillset a:hover{color:#fff}
+body.dark .pillset a[aria-current="page"]{background:#fff;color:#000;box-shadow:none}
+body.dark .socials a{border-color:#2E2E2E}
+body.dark .socials svg{fill:#fff}
+body.dark .socials a:hover{background:#fff;border-color:#fff}
+body.dark .socials a:hover svg{fill:#000}
+body.dark .contact .book{border-color:#fff}
+body.dark .contact .book:hover{background:#fff;color:#000}
+body.dark .contact hr{border-top-color:#242424}
+body.dark .contact .details .tel{color:#8E8E8E}
+body.dark footer{color:#6E6E6E}
+
+.profile{display:flex;align-items:center;gap:16px;padding-top:56px}
+.profile img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+.profile .who strong{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em}
+.profile .who span{font-size:13.5px;color:#9A9A9A}
+
+.introrow{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:32px;
+  flex-wrap:wrap;margin-top:26px;
+}
+.introrow p{font-size:15px;max-width:44ch;color:#DCDCDC}
+.introrow p + p{margin-top:14px;color:#9A9A9A}
+.introrow u{text-decoration-color:#5A5A5A;text-underline-offset:3px}
+
+.manifesto{
+  font-size:clamp(30px,5.4vw,64px);font-weight:700;letter-spacing:-.035em;
+  line-height:1.12;color:#4A4A4A;margin:58px 0 74px;max-width:20ch;
+}
+.manifesto b{color:#fff;font-weight:700}
+
+.bio{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-bottom:88px}
+@media(max-width:900px){.bio{grid-template-columns:1fr;gap:28px}}
+.bio .eyebrow{color:#9A9A9A;letter-spacing:.1em;font-size:12px;margin-bottom:14px}
+.bio h2{font-size:clamp(24px,3vw,34px);font-weight:700;letter-spacing:-.025em;line-height:1.24}
+.bio .lede{font-size:14px;color:#9A9A9A;margin-top:16px;max-width:46ch}
+.bio p.body{font-size:15px;color:#C8C8C8;margin-bottom:17px;max-width:52ch}
+.bio .chips{padding-top:6px}
+body.dark .chip{background:#141414;color:#9A9A9A}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card:hover,.accent .pill:hover{transform:none}
+}
+
+/* ---------- reels row (vertical 9:16 cards) ---------------------------- */
+.reelrow{
+  display:grid;grid-auto-flow:column;grid-auto-columns:236px;gap:16px;
+  overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;
+}
+.reelrow::-webkit-scrollbar{height:8px}
+.reelrow::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
+.reel{
+  position:relative;aspect-ratio:9/16;border-radius:16px;overflow:hidden;
+  background:#111;scroll-snap-align:start;display:block;
+  border:1px solid var(--line);
+}
+.reel video{width:100%;height:100%;object-fit:cover;display:block}
+.reel .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:34px 14px 12px;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));
+  color:#fff;font-size:13px;font-weight:500;line-height:1.35;
+}
+.reel .play{
+  position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;
+  background:rgba(0,0,0,.55);display:grid;place-items:center;pointer-events:none;
+}
+.reel .play svg{width:11px;height:11px;fill:#fff}
+.followig{
+  display:inline-flex;align-items:center;gap:9px;margin-top:20px;
+  border:1px solid var(--line);border-radius:999px;padding:11px 22px;
+  font-size:14px;font-weight:600;transition:.18s;
+}
+.followig:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.followig:hover svg{fill:#fff}
+.followig svg{width:16px;height:16px;fill:var(--ink);transition:fill .18s}
+@media(max-width:640px){.reelrow{grid-auto-columns:180px}}

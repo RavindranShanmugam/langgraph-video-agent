@@ -7,9 +7,11 @@
   "scripts": {
     "browser": "playwright install chromium",
     "extract": "node extract.mjs",
-    "serve": "npx --yes http-server site -p 8080 -c-1"
+    "serve": "npx --yes http-server site -p 8080 -c-1",
+    "reels": "node add-reels.mjs"
   },
   "devDependencies": {
-    "playwright": "1.56.1"
+    "playwright": "1.56.1",
+    "ffmpeg-static": "^5.3.0"
   }
 }
