@@ -130,6 +130,10 @@ img{max-width:100%;display:block}
   .herographic canvas.is-live{opacity:1}
 }
 
+/* The nav is sticky, so an anchor jump would otherwise land with the heading
+   hidden underneath it. Only needed since the CTAs became #contact links. */
+[id]{scroll-margin-top:96px}
+
 /* ---------- meta strip ------------------------------------------------ */
 .metastrip{
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
