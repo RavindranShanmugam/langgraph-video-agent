@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ravi Shanmugam Systems Work</title>
+<meta name="description" content="Ravindran Shanmugam (Ravs LLC) builds AI agents, automation and workflows for local businesses in Cary, NC and the Triangle. Built in weeks, owned by you, running 24/7.">
+<meta name="author" content="Ravindran Shanmugam">
+<meta name="theme-color" content="#FBFBF9">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ravi Shanmugam — AI Systems Builder">
+<meta property="og:description" content="AI agents, automation and workflows for local businesses. Built in weeks, owned by you, running 24/7.">
+<meta property="og:image" content="assets/ravi.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/ravi.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFBF9; --card:#FFFFFF; --panel:#F2F1ED;
+  --ink:#14161A; --mid:#5B6169; --line:#E2E1DC;
+  --accent:#E8500F; --teal:#0E7C6B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+
+/* header */
+.top{padding:26px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(251,251,249,.92);backdrop-filter:blur(10px);z-index:20}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.wordmark{font-weight:700;font-size:17px;letter-spacing:-.01em}
+.wordmark span{color:var(--mid);font-weight:400}
+.nav{display:flex;gap:26px;font-size:14.5px;color:var(--mid)}
+.nav a:hover{color:var(--ink)}
+@media(max-width:720px){.nav{display:none}}
+
+/* masthead hero */
+.mast{padding:72px 0 64px;display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:center}
+@media(max-width:900px){.mast{grid-template-columns:1fr;gap:40px}}
+.mast .line{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;
+  line-height:.94;letter-spacing:.01em;display:block}
+.mast .xl{font-size:clamp(64px,12.5vw,168px);color:var(--ink)}
+.mast .lg{font-size:clamp(34px,6.4vw,86px);color:var(--accent)}
+.mast .meta{font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.4vw,14px);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--mid);margin-top:22px;line-height:2.1}
+.mast .meta b{color:var(--ink);font-weight:500}
+
+/* 3D scene */
+.scene{width:250px;height:280px;perspective:900px;margin:0 auto;position:relative}
+.cube{position:absolute;left:50%;top:46%;width:120px;height:120px;margin:-60px 0 0 -60px;
+  transform-style:preserve-3d;animation:spin 16s linear infinite}
+.cube div{position:absolute;width:120px;height:120px;border:2px solid var(--ink);background:rgba(251,251,249,.88);
+  display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);backface-visibility:visible}
+.cube .f1{transform:translateZ(60px);background:#fff}
+.cube .f2{transform:rotateY(180deg) translateZ(60px)}
+.cube .f3{transform:rotateY(90deg) translateZ(60px);background:var(--accent);color:#fff;border-color:var(--accent)}
+.cube .f4{transform:rotateY(-90deg) translateZ(60px)}
+.cube .f5{transform:rotateX(90deg) translateZ(60px);background:var(--panel)}
+.cube .f6{transform:rotateX(-90deg) translateZ(60px);background:var(--panel)}
+.scene .shadow{position:absolute;left:50%;bottom:6px;width:150px;height:18px;margin-left:-75px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(20,22,26,.16),transparent 70%)}
+.scene img{position:absolute;right:-6px;top:-10px;width:92px;height:92px;border-radius:50%;object-fit:cover;
+  border:3px solid #fff;box-shadow:0 6px 22px rgba(20,22,26,.16)}
+@keyframes spin{from{transform:rotateX(-18deg) rotateY(0)}to{transform:rotateX(-18deg) rotateY(360deg)}}
+@media(prefers-reduced-motion:reduce){.cube{animation:none;transform:rotateX(-18deg) rotateY(32deg)}}
+
+/* 3D tilt cards */
+.grid{perspective:1200px}
+.card{transform-style:preserve-3d;will-change:transform}
+.card.tilting{transition:none}
+.card:not(.tilting){transition:transform .45s ease,box-shadow .2s}
+
+/* hero */
+.hero{padding:84px 0 72px;display:grid;grid-template-columns:1fr 220px;gap:60px;align-items:start}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px}}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.03;letter-spacing:-.035em;margin:18px 0 0;text-wrap:balance;max-width:17ch}
+.hero p{color:var(--mid);font-size:clamp(17px,1.9vw,20px);max-width:56ch;margin-top:22px}
+.hero p b{color:var(--ink);font-weight:500}
+.hero img{width:200px;height:200px;border-radius:50%;object-fit:cover;display:block;justify-self:center}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-block;font-weight:500;font-size:15px;padding:13px 24px;border-radius:6px}
+.b1{background:var(--ink);color:#fff}
+.b1:hover{background:#000}
+.b2{border:1px solid var(--line);background:var(--card)}
+.b2:hover{border-color:var(--ink)}
+
+/* section heads */
+.sec{padding:70px 0 10px}
+.sec-top{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.sec-note{color:var(--mid);font-size:15px;max-width:56ch}
+.sec p.intro{color:var(--mid);max-width:62ch;margin-top:10px}
+
+/* project cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:26px;margin-top:36px}
+@media(max-width:920px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 10px 34px rgba(20,22,26,.09);transform:translateY(-2px)}
+.card .vis{background:var(--panel);border-bottom:1px solid var(--line);padding:26px 22px 18px;overflow-x:auto}
+.card .vis svg{width:100%;height:auto;display:block;color:var(--ink)}
+.card .body{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1}
+.card .row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.card h3{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--teal);border:1px solid rgba(14,124,107,.3);border-radius:99px;padding:4px 11px;white-space:nowrap}
+.card .desc{color:var(--mid);font-size:15px;margin-top:10px}
+.card .desc b{color:var(--ink);font-weight:500}
+.card .cap{font-size:13.5px;color:var(--mid);margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.card .cap b{color:var(--ink);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:18px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--panel);border-radius:4px;padding:5px 9px;color:var(--mid)}
+
+/* simple 3-up */
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;margin-top:34px}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 24px}
+.mini .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.1em}
+.mini h3{font-size:18px;font-weight:700;margin:10px 0 8px;letter-spacing:-.01em}
+.mini p{color:var(--mid);font-size:14.5px}
+
+/* about */
+.about{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:76px;padding:70px 0}
+.about .wrap{display:grid;grid-template-columns:200px 1fr;gap:52px;align-items:start}
+@media(max-width:780px){.about .wrap{grid-template-columns:1fr;gap:28px}}
+.about img{width:170px;height:170px;border-radius:50%;object-fit:cover;display:block}
+.about h2{margin-bottom:16px}
+.about p{color:var(--mid);max-width:66ch;margin-bottom:14px}
+
+/* contact */
+.contact{padding:76px 0 40px}
+.contact h2{max-width:20ch;margin-bottom:14px}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:34px}
+.links a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:block;transition:.18s}
+.links a:hover{border-color:var(--ink)}
+.links .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mid)}
+.links .v{font-weight:500;font-size:15px;margin-top:7px;word-break:break-word}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:#8A9099;font-size:13px}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="wordmark">Ravindran Shanmugam <span>· Ravs LLC</span></div>
+  <nav class="nav">
+    <a href="#work">Work</a><a href="#os">Business OS</a><a href="#how">Process</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <section class="mast">
+    <div>
+      <span class="line xl">Ravi</span>
+      <span class="line lg">AI Systems Builder</span>
+      <div class="meta">
+        Based in Cary, NC, USA<br>
+        Specialising in <b>AI agents, automation &amp; workflows</b> for local businesses<br>
+        Built in weeks &middot; Owned by you &middot; Running 24/7
+      </div>
+      <div class="cta">
+        <a class="btn b1" href="https://automation.ravsdigital.com/">Book a 20-minute call</a>
+        <a class="btn b2" href="tel:+19848959582">(984) 895-9582</a>
+      </div>
+    </div>
+    <div class="scene">
+      <div class="cube">
+        <div class="f1">agent</div><div class="f2">memory</div><div class="f3">24/7</div>
+        <div class="f4">tools</div><div class="f5"></div><div class="f6"></div>
+      </div>
+      <div class="shadow"></div>
+      <img src="assets/ravi.jpg" alt="Ravindran Shanmugam">
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="sec-top">
+      <h2>Selected work</h2>
+      <div class="sec-note">Every system here is real, running, and published openly on GitHub.</div>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="vis">
+          <svg viewBox="0 0 620 240" role="img" aria-label="A submitted form triggers an immediate outbound call, which books a slot on a calendar.">
+            <defs><marker id="a1" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0,0 10,4 0,8" fill="#E8500F"/></marker></defs>
+            <rect x="34" y="76" width="104" height="88" rx="6" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <line x1="54" y1="102" x2="118" y2="102" stroke="#5B6169" stroke-width="4" stroke-linecap="round"/>
+            <line x1="54" y1="120" x2="118" y2="120" stroke="#E2E1DC" stroke-width="4" stroke-linecap="round"/>
+            <line x1="54" y1="138" x2="94" y2="138" stroke="#E2E1DC" stroke-width="4" stroke-linecap="round"/>
+            <path d="M158 120 L246 120" stroke="#E8500F" stroke-width="4" marker-end="url(#a1)"/>
+            <path d="M186 92 a44 44 0 0 1 0 56" fill="none" stroke="#E8500F" stroke-width="2" stroke-dasharray="3 5" opacity=".55"/>
+            <circle cx="330" cy="120" r="52" fill="#0E7C6B" opacity=".08"/>
+            <path d="M306 98 q-8 26 14 44 q22 18 42 6 l-12 -18 l-18 6 q-14 -10 -14 -24 l16 -12 z" fill="#0E7C6B"/>
+            <path d="M372 88 a40 40 0 0 1 0 64" fill="none" stroke="#0E7C6B" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M386 76 a58 58 0 0 1 0 88" fill="none" stroke="#0E7C6B" stroke-width="2.5" stroke-linecap="round" opacity=".45"/>
+            <path d="M414 120 L482 120" stroke="#14161A" stroke-width="3" marker-end="url(#a1)"/>
+            <rect x="496" y="72" width="96" height="96" rx="6" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <line x1="496" y1="96" x2="592" y2="96" stroke="#14161A" stroke-width="2"/>
+            <rect x="508" y="108" width="22" height="16" rx="2" fill="#E2E1DC"/>
+            <rect x="534" y="108" width="22" height="16" rx="2" fill="#E8500F"/>
+            <rect x="560" y="108" width="22" height="16" rx="2" fill="#E2E1DC"/>
+            <rect x="508" y="132" width="22" height="16" rx="2" fill="#E2E1DC"/>
+            <rect x="534" y="132" width="22" height="16" rx="2" fill="#E2E1DC"/>
+            <rect x="560" y="132" width="22" height="16" rx="2" fill="#E2E1DC"/>
+            <text x="202" y="112" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#E8500F">&lt; 5 sec</text>
+            <text x="86" y="196" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5B6169">form fill</text>
+            <text x="330" y="196" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5B6169">agent calls</text>
+            <text x="544" y="196" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5B6169">booked</text>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="row"><h3>Speed-to-Lead</h3><span class="tag">Live</span></div>
+          <p class="desc">A lead fills in a form at 9pm. Seconds later an AI voice agent calls them, works out the job, offers real calendar openings, books it, logs it and texts a confirmation. <b>The owner's first involvement is a text saying the job is already booked.</b></p>
+          <p class="cap"><b>The decision that mattered:</b> built on the client's own accounts, not a per-seat platform. They own it outright — no monthly tax on their own lead flow.</p>
+          <div class="chips"><span class="chip">Voice AI</span><span class="chip">FastAPI</span><span class="chip">Calendar booking</span><span class="chip">CRM + SMS</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="vis">
+          <svg viewBox="0 0 620 240" role="img" aria-label="Bank statements resolve into a structured grid of data, with calculation handled separately by code rather than by the model.">
+            <defs><marker id="a2" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0,0 10,4 0,8" fill="#14161A"/></marker></defs>
+            <rect x="46" y="66" width="86" height="108" rx="5" fill="#fff" stroke="#5B6169" stroke-width="2" transform="rotate(-7 89 120)"/>
+            <rect x="58" y="70" width="86" height="108" rx="5" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <line x1="74" y1="94" x2="128" y2="94" stroke="#5B6169" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="74" y1="110" x2="128" y2="110" stroke="#E2E1DC" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="74" y1="126" x2="112" y2="126" stroke="#E2E1DC" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="74" y1="142" x2="128" y2="142" stroke="#E2E1DC" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M166 122 L232 122" stroke="#14161A" stroke-width="3" marker-end="url(#a2)"/>
+            <g>
+              <rect x="252" y="72" width="150" height="100" rx="5" fill="#fff" stroke="#0E7C6B" stroke-width="2"/>
+              <line x1="252" y1="97" x2="402" y2="97" stroke="#0E7C6B" stroke-width="1.5"/>
+              <line x1="302" y1="72" x2="302" y2="172" stroke="#E2E1DC" stroke-width="1.5"/>
+              <line x1="352" y1="72" x2="352" y2="172" stroke="#E2E1DC" stroke-width="1.5"/>
+              <line x1="252" y1="122" x2="402" y2="122" stroke="#E2E1DC" stroke-width="1.5"/>
+              <line x1="252" y1="147" x2="402" y2="147" stroke="#E2E1DC" stroke-width="1.5"/>
+              <rect x="256" y="126" width="42" height="14" rx="2" fill="#0E7C6B" opacity=".22"/>
+              <rect x="306" y="151" width="42" height="14" rx="2" fill="#0E7C6B" opacity=".22"/>
+            </g>
+            <path d="M420 122 L470 122" stroke="#14161A" stroke-width="3" marker-end="url(#a2)"/>
+            <circle cx="530" cy="122" r="44" fill="#E8500F" opacity=".1"/>
+            <path d="M530 88 l7 12 h14 l-7 12 l7 12 h-14 l-7 12 l-7 -12 h-14 l7 -12 l-7 -12 h14 z" fill="none" stroke="#E8500F" stroke-width="2.5" stroke-linejoin="round" transform="rotate(0 530 110)"/>
+            <circle cx="530" cy="122" r="16" fill="none" stroke="#E8500F" stroke-width="2.5"/>
+            <circle cx="530" cy="122" r="5" fill="#E8500F"/>
+            <text x="102" y="204" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5B6169">statements</text>
+            <text x="327" y="204" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5B6169">structured data</text>
+            <text x="530" y="204" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#E8500F">code does the math</text>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="row"><h3>Finance Spreadsheet Agent</h3><span class="tag">Live</span></div>
+          <p class="desc">Bank statement PDFs become a categorized spreadsheet you can talk to. Ask "what did I spend most on last quarter?" and get a real answer from your own data — running entirely on your machine, with nothing uploaded anywhere.</p>
+          <p class="cap"><b>The decision that mattered:</b> the model picks the tool; Python does the arithmetic. Language models are excellent at routing and unreliable at counting — so they never touch the numbers.</p>
+          <div class="chips"><span class="chip">Local LLM</span><span class="chip">PDF extraction</span><span class="chip">Tool-calling agent</span><span class="chip">Fully private</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="vis">
+          <svg viewBox="0 0 620 240" role="img" aria-label="In a linear script one failed step kills the whole run; as a graph the failed node retries on its own and the rest of the run survives.">
+            <defs><marker id="a3" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0,0 10,4 0,8" fill="#14161A"/></marker>
+            <marker id="a3g" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0,0 10,4 0,8" fill="#C6C4BE"/></marker></defs>
+            <text x="30" y="40" font-family="IBM Plex Mono, monospace" font-size="11.5" letter-spacing="1.2" fill="#5B6169">SCRIPT</text>
+            <circle cx="120" cy="70" r="16" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <circle cx="220" cy="70" r="16" fill="#fff" stroke="#E8500F" stroke-width="2.5"/>
+            <path d="M214 64 l12 12 M226 64 l-12 12" stroke="#E8500F" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="320" cy="70" r="16" fill="#fff" stroke="#C6C4BE" stroke-width="2" stroke-dasharray="3 3"/>
+            <circle cx="420" cy="70" r="16" fill="#fff" stroke="#C6C4BE" stroke-width="2" stroke-dasharray="3 3"/>
+            <line x1="140" y1="70" x2="198" y2="70" stroke="#14161A" stroke-width="2" marker-end="url(#a3)"/>
+            <line x1="240" y1="70" x2="298" y2="70" stroke="#C6C4BE" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#a3g)"/>
+            <line x1="340" y1="70" x2="398" y2="70" stroke="#C6C4BE" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#a3g)"/>
+            <text x="450" y="75" font-family="IBM Plex Mono, monospace" font-size="12" fill="#E8500F">run dies</text>
+            <line x1="30" y1="112" x2="590" y2="112" stroke="#E2E1DC" stroke-width="1.5"/>
+            <text x="30" y="152" font-family="IBM Plex Mono, monospace" font-size="11.5" letter-spacing="1.2" fill="#0E7C6B">GRAPH</text>
+            <circle cx="120" cy="182" r="16" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <circle cx="220" cy="182" r="16" fill="#fff" stroke="#E8500F" stroke-width="2.5"/>
+            <circle cx="320" cy="182" r="16" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <circle cx="420" cy="182" r="16" fill="#fff" stroke="#14161A" stroke-width="2"/>
+            <line x1="140" y1="182" x2="198" y2="182" stroke="#14161A" stroke-width="2" marker-end="url(#a3)"/>
+            <line x1="240" y1="182" x2="298" y2="182" stroke="#14161A" stroke-width="2" marker-end="url(#a3)"/>
+            <line x1="340" y1="182" x2="398" y2="182" stroke="#14161A" stroke-width="2" marker-end="url(#a3)"/>
+            <path d="M204 172 A22 22 0 1 1 236 172" fill="none" stroke="#E8500F" stroke-width="2.2" stroke-linecap="round" marker-end="url(#a3)"/>
+            <text x="450" y="187" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0E7C6B">run finishes</text>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="row"><h3>LangGraph Video Agent</h3><span class="tag">Open source</span></div>
+          <p class="desc">Long video into ready-to-post shorts — transcribe, select, trim, caption. Rebuilt from a linear script into a directed graph, so <b>a failure is contained to the node that caused it</b> instead of taking down an eight-minute run at the last step.</p>
+          <p class="cap"><b>The decision that mattered:</b> I rebuilt something that already worked. Reliability is a shape you choose at the start — retrofitting it costs more than building it twice.</p>
+          <div class="chips"><span class="chip">LangGraph</span><span class="chip">Whisper</span><span class="chip">Per-node retries</span><span class="chip">FFmpeg</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="sec" id="os">
+    <div class="sec-top">
+      <h2>The Business OS</h2>
+      <div class="sec-note">The full system, rather than one workflow at a time.</div>
+    </div>
+    <p class="intro">Most "AI solutions" are a chatbot in a box — intelligence with no hands. This is the difference: an agent with its own computer, its own inbox, its own phone number and its own payment card, so it can actually act.</p>
+
+    <article class="card" style="margin-top:32px">
+      <div class="vis">
+        <svg viewBox="0 0 1080 200" role="img" aria-label="A language model becomes an AI employee once ten layers of infrastructure are added around it: harness, computer, email, phone, card, knowledge, memory, connectors and observability.">
+          <defs><marker id="a4" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0,0 10,4 0,8" fill="#14161A"/></marker></defs>
+          <rect x="20" y="62" width="150" height="70" rx="6" fill="#fff" stroke="#14161A" stroke-width="2"/>
+          <text x="95" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="14" font-weight="700" fill="#14161A">A model</text>
+          <text x="95" y="112" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6169">answers</text>
+          <line x1="176" y1="97" x2="216" y2="97" stroke="#14161A" stroke-width="2" marker-end="url(#a4)"/>
+          <rect x="228" y="34" width="620" height="126" rx="8" fill="#fff" stroke="#0E7C6B" stroke-width="1.6" stroke-dasharray="5 5"/>
+          <text x="538" y="24" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4" fill="#0E7C6B">TEN LAYERS OF INFRASTRUCTURE</text>
+          <text x="330" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">harness</text>
+          <text x="538" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">computer</text>
+          <text x="746" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">email</text>
+          <text x="330" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">phone</text>
+          <text x="538" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">card</text>
+          <text x="746" y="98" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">knowledge</text>
+          <text x="330" y="128" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">memory</text>
+          <text x="538" y="128" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">connectors</text>
+          <text x="746" y="128" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#14161A">observability</text>
+          <text x="538" y="152" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6169">everything it needs to act without asking you first</text>
+          <line x1="860" y1="97" x2="900" y2="97" stroke="#14161A" stroke-width="2" marker-end="url(#a4)"/>
+          <rect x="912" y="62" width="150" height="70" rx="6" fill="#E8500F" stroke="#E8500F" stroke-width="2"/>
+          <text x="987" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="14" font-weight="700" fill="#fff">An employee</text>
+          <text x="987" y="112" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#FFD9C6">acts</text>
+        </svg>
+      </div>
+      <div class="body">
+        <div class="row"><h3>A model answers questions. An employee does the job.</h3></div>
+        <p class="desc">The difference isn't a smarter model — it's what the model owns. Give it a computer it can drive, an inbox it can sign up with, a number customers can text and a card it can pay with, and the same intelligence stops being a chat window and starts being a colleague.</p>
+        <p class="cap"><b>Deployed day one.</b> A recorded discovery call becomes the spec, the employee is spun up from a template, and it lands in a shared channel with your team the same day. Skills get built in order of revenue.</p>
+        <div class="chips"><span class="chip">Own computer</span><span class="chip">Own inbox</span><span class="chip">Own number</span><span class="chip">Own card</span><span class="chip">Persistent memory</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="sec-top">
+      <h2>How I work</h2>
+      <div class="sec-note">Three steps. No lengthy discovery phase, no six-month roadmap.</div>
+    </div>
+    <div class="three">
+      <div class="mini"><div class="n">01</div><h3>We find the leak</h3><p>A 20-minute call. You describe your week; I point at what's quietly eating it. You leave with a straight answer either way — including "don't automate that", when that's the truth.</p></div>
+      <div class="mini"><div class="n">02</div><h3>I build it</h3><p>Weeks, not quarters. On your accounts and your stack, so nothing ends up trapped inside a platform you'd have to keep paying to escape.</p></div>
+      <div class="mini"><div class="n">03</div><h3>You own it</h3><p>Handover, documentation, training. Yours to run, change, or hand to someone else entirely. I'm around when you want more built.</p></div>
+    </div>
+  </section>
+</div>
+
+<section class="about" id="about"><div class="wrap">
+  <img src="assets/ravi.jpg" alt="Ravindran Shanmugam">
+  <div>
+    <h2>I moved here from Chennai and started from scratch.</h2>
+    <p>Everything I know about building, I learned by building — in public, on GitHub, where anyone can check the work before they trust me with theirs.</p>
+    <p>I build AI systems for businesses around the Triangle: the kind that answer a lead at 11pm, read the paperwork nobody wants to touch, and quietly handle the admin that used to eat somebody's whole afternoon.</p>
+    <p>I care more about systems that keep running than demos that look good once. In practice that means retries, fallbacks, error handling and documentation — and handing you something you actually control at the end of it.</p>
+    <div class="chips" style="padding-top:8px"><span class="chip">Cary, NC</span><span class="chip">Serving the Triangle</span><span class="chip">Building in public</span><span class="chip">Local &amp; private AI</span></div>
+  </div>
+</div></section>
+
+<div class="wrap">
+  <section class="contact" id="contact">
+    <h2>Tell me the task you'd never hire a person for. I'll tell you if a machine can do it.</h2>
+    <p class="sec-note">Free 20-minute call. No pitch deck, no obligation — just a straight read on whether automation is worth it for your business.</p>
+    <div class="cta">
+      <a class="btn b1" href="https://automation.ravsdigital.com/">Book the call</a>
+      <a class="btn b2" href="tel:+19848959582">Call or text (984) 895-9582</a>
+    </div>
+    <div class="links">
+      <a href="https://automation.ravsdigital.com/"><div class="k">Website</div><div class="v">automation.ravsdigital.com</div></a>
+      <a href="tel:+19848959582"><div class="k">Call or text</div><div class="v">(984) 895-9582</div></a>
+      <a href="mailto:ravindranshanmugam04@gmail.com?subject=AI%20automation%20enquiry"><div class="k">Email</div><div class="v">ravindranshanmugam04@gmail.com</div></a>
+      <a href="https://github.com/RavindranShanmugam"><div class="k">The code</div><div class="v">github.com/RavindranShanmugam</div></a>
+      <a href="https://www.linkedin.com/in/ravindranshanmugam"><div class="k">LinkedIn</div><div class="v">linkedin.com/in/ravindranshanmugam</div></a>
+    </div>
+  </section>
+  <footer>Ravs LLC · Custom AI employees &amp; automated workflows · Cary, North Carolina</footer>
+</div>
+
+<script id="tiltJS">
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(!matchMedia('(pointer: fine)').matches)return;
+  document.querySelectorAll('.card').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.classList.add('tilting');
+      card.style.transform='rotateY('+(x*7)+'deg) rotateX('+(-y*7)+'deg) translateY(-2px)';
+    });
+    card.addEventListener('mouseleave',function(){
+      card.classList.remove('tilting');
+      card.style.transform='';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
