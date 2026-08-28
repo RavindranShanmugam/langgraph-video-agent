@@ -1,0 +1,14 @@
+{
+  "name": "site-extractor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Renders a website in Chromium and emits a self-contained static frontend package.",
+  "scripts": {
+    "extract": "node extract.mjs",
+    "serve": "npx --yes http-server site -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}
